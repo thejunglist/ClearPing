@@ -16,8 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.urls import include
+from clear_ping import views
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include ('clear_ping.urls'),
-    path('netutils/', include('network_tools.urls')))
+    path("netutils/", include("clear_ping.urls")),
+    path('ping/', views.ping, name='ping')
 ]

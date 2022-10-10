@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 from netutils.ping import tcp_ping
 from netutils.ip import is_ip, cidr_to_netmask, netmask_to_cidr, is_netmask
 
@@ -17,7 +16,7 @@ def ping(request):
     elif 'ip' in request.GET:
         if is_ip(request.GET['ip']) is False:
             test_result['test_result'] = 'Please enter a valid IP Address'
-            return render(request, "network_tools/ping.html", test_result)
+            return render(request, "clear_ping/ping.html", test_result)
         host_ip = request.GET['ip']
         host_port = request.GET['port']
         ping_result = tcp_ping(host_ip, host_port)
@@ -26,4 +25,4 @@ def ping(request):
         else:
             test_result['test_result'] = f"Failure: Cannot open connection to Port {host_port} on host {host_ip}"
         
-    return render(request, "network_tools/ping.html", test_result)
+    return render(request, "clear_ping/ping.html", test_result)
